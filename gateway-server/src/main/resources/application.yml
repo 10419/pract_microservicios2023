@@ -1,35 +1,7 @@
-server:
-  port: 9192
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:9191/eureka}
 spring:
-  cloud:
-    gateway:
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins: "http://localhost:4200"
-            allowedHeaders: "*"
-            allowedMethods:
-              - GET
-              - POST
-              - PUT
-              - DELETE
-      discovery:
-        locator:
-          enabled: true
-      routes:
-        - id: catalogo-service
-          uri: lb://catalogo-service
-          predicates:
-            - Path=/categoria/**,/producto/**
-        - id: cliente-service
-          uri: lb://cliente-service
-          predicates:
-            - Path=/cliente/**
-        - id: venta-service
-          uri: lb://venta-service
-          predicates:
-            - Path=/venta/**
+  application:
+    name: gateway-service
+  profiles:
+    active: development
+  config:
+    import: optional:configserver:http://root:s3cr3t@localhost:9094
