@@ -1,12 +1,7 @@
-server:
-  port: 9093    
 spring:
-  jpa:
-    hibernate.ddl-auto: update
-    show-sql: true
-    generate-ddl: true
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/venta
-    username: root
-    password:
+  application:
+    name: venta-service
+  profiles:
+    active: development
+  config:
+    import: optional:configserver:http://root:s3cr3t@localhost:9094
