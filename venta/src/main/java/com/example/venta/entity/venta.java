@@ -2,6 +2,7 @@ package com.example.venta.entity;
 
 import java.util.List;
 
+import com.example.venta.dto.cliente;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -12,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 import lombok.Data;
 
 @Entity
@@ -23,9 +25,11 @@ public class venta {
     private String serie;
     private String numero;
     private String descripcion;
-    private String clienteId;
+    private Integer clienteId;
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "venta_id")
     private List<ventadetalle> detalle;
+    @Transient
+    private cliente cliente;
 }
